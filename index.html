@@ -1,0 +1,1088 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Amsolan West Kitchen – Enjoy Homestyle Cooking</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Lato:wght@400;700;900&display=swap" rel="stylesheet">
+<style>
+/* ══ RESET ══════════════════════════════════════════════ */
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+:root {
+  --rust:    #C0392B;
+  --rust2:   #96281b;
+  --copper:  #B5651D;
+  --gold:    #D4A017;
+  --cream:   #FDF6EC;
+  --dark:    #1C110A;
+  --charcoal:#2d2010;
+  --white:   #ffffff;
+  --sand:    #F5E6CC;
+  --nav-h:   72px;           /* single source of truth for nav height */
+}
+
+html { scroll-behavior: smooth; scroll-padding-top: var(--nav-h); }
+
+body {
+  font-family: 'Lato', sans-serif;
+  background: var(--cream);
+  color: var(--dark);
+  overflow-x: hidden;
+}
+
+/* ══ NAVBAR ═════════════════════════════════════════════ */
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 200;
+  background: var(--dark);
+  box-shadow: 0 4px 32px rgba(0,0,0,.5);
+}
+.nav-inner {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 0 5%; height: var(--nav-h);
+  gap: 16px;
+}
+.nav-logo img { height: 50px; filter: drop-shadow(0 2px 8px rgba(0,0,0,.4)); display: block; }
+.nav-links { display: flex; gap: 28px; list-style: none; }
+.nav-links a {
+  color: var(--sand); font-weight: 700; font-size: .88rem;
+  text-decoration: none; letter-spacing: .08em; text-transform: uppercase;
+  transition: color .2s;
+}
+.nav-links a:hover { color: var(--gold); }
+.nav-cta {
+  background: var(--rust); color: var(--white);
+  border: none; border-radius: 50px;
+  padding: 10px 24px; font-family: 'Lato', sans-serif;
+  font-weight: 900; font-size: .86rem; cursor: pointer;
+  letter-spacing: .05em; white-space: nowrap;
+  transition: background .2s, transform .2s;
+  flex-shrink: 0;
+}
+.nav-cta:hover { background: var(--rust2); transform: scale(1.05); }
+
+/* Hamburger — hidden on desktop */
+.hamburger {
+  display: none; flex-direction: column;
+  justify-content: center; gap: 5px;
+  cursor: pointer; padding: 6px; flex-shrink: 0;
+  background: none; border: none;
+}
+.hamburger span {
+  display: block; width: 24px; height: 2.5px;
+  background: var(--sand); border-radius: 3px;
+  transition: transform .3s, opacity .3s;
+  transform-origin: center;
+}
+.hamburger.open span:nth-child(1) { transform: translateY(7.5px) rotate(45deg); }
+.hamburger.open span:nth-child(2) { opacity: 0; transform: scaleX(0); }
+.hamburger.open span:nth-child(3) { transform: translateY(-7.5px) rotate(-45deg); }
+
+/* Mobile dropdown */
+.mobile-menu {
+  display: none;
+  flex-direction: column;
+  background: var(--charcoal);
+  overflow: hidden;
+}
+.mobile-menu.open { display: flex; }
+.mobile-menu a {
+  color: var(--sand); text-decoration: none; font-weight: 700;
+  font-size: .95rem; padding: 15px 5%;
+  border-bottom: 1px solid rgba(255,255,255,.07);
+  letter-spacing: .06em; text-transform: uppercase;
+  transition: color .2s, background .2s;
+}
+.mobile-menu a:last-child { border-bottom: none; }
+.mobile-menu a:hover { color: var(--gold); background: rgba(255,255,255,.04); }
+.mobile-menu .mob-cta {
+  color: var(--gold);
+  border-bottom: none;
+  padding-bottom: 18px;
+}
+
+/* ══ HERO ════════════════════════════════════════════════ */
+.hero {
+  min-height: 100vh;
+  background: linear-gradient(135deg, var(--dark) 0%, #3a1a0a 60%, #5a2a0e 100%);
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: center;
+  padding: calc(var(--nav-h) + 40px) 5% 80px;
+  gap: 40px;
+  position: relative; overflow: hidden;
+}
+.hero::before {
+  content: ''; position: absolute; top: -200px; right: -200px;
+  width: 700px; height: 700px;
+  background: radial-gradient(circle, rgba(180,101,29,.25) 0%, transparent 70%);
+  pointer-events: none;
+}
+.hero::after {
+  content: ''; position: absolute; bottom: -100px; left: -100px;
+  width: 500px; height: 500px;
+  background: radial-gradient(circle, rgba(192,57,43,.15) 0%, transparent 70%);
+  pointer-events: none;
+}
+.hero-pattern {
+  position: absolute; inset: 0;
+  background-image: radial-gradient(circle, rgba(212,160,23,.06) 1px, transparent 1px);
+  background-size: 40px 40px; pointer-events: none;
+}
+
+.hero-text { position: relative; z-index: 2; }
+.hero-badge {
+  display: inline-flex; align-items: center; gap: 8px;
+  background: rgba(212,160,23,.15); color: var(--gold);
+  border: 1px solid rgba(212,160,23,.3);
+  font-weight: 700; font-size: .82rem; letter-spacing: .12em;
+  text-transform: uppercase; padding: 7px 20px; border-radius: 50px;
+  margin-bottom: 20px;
+}
+.hero-text h1 {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(2.4rem, 5.5vw, 5rem);
+  color: var(--white); line-height: 1.08; margin-bottom: 8px;
+}
+.hero-text h1 .accent { color: var(--gold); }
+.hero-text h1 .line2 { color: var(--rust); display: block; }
+.hero-subtitle {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(.9rem, 2vw, 1.3rem);
+  color: var(--copper); letter-spacing: .06em; text-transform: uppercase;
+  margin-bottom: 18px;
+}
+.hero-text > p {
+  color: rgba(255,255,255,.7); font-size: 1rem;
+  line-height: 1.75; margin-bottom: 36px; max-width: 480px;
+}
+.hero-btns { display: flex; gap: 12px; flex-wrap: wrap; }
+
+.btn-primary {
+  background: var(--rust); color: var(--white);
+  border: none; border-radius: 50px;
+  padding: 14px 34px; font-family: 'Lato', sans-serif;
+  font-weight: 900; font-size: .95rem; cursor: pointer;
+  text-decoration: none; display: inline-block; letter-spacing: .04em;
+  box-shadow: 0 8px 28px rgba(192,57,43,.4);
+  transition: transform .2s, box-shadow .2s, background .2s;
+}
+.btn-primary:hover { transform: translateY(-3px); background: var(--rust2); box-shadow: 0 14px 36px rgba(192,57,43,.5); }
+
+.btn-outline {
+  background: transparent; color: var(--gold);
+  border: 2px solid var(--gold); border-radius: 50px;
+  padding: 12px 30px; font-family: 'Lato', sans-serif;
+  font-weight: 900; font-size: .95rem; cursor: pointer;
+  text-decoration: none; display: inline-block; letter-spacing: .04em;
+  transition: background .2s, color .2s;
+}
+.btn-outline:hover { background: var(--gold); color: var(--dark); }
+
+.hero-image {
+  display: flex; justify-content: center; align-items: center;
+  position: relative; z-index: 2;
+}
+.hero-logo-wrap {
+  position: relative; display: flex; align-items: center; justify-content: center;
+}
+.hero-logo-glow {
+  position: absolute; width: 420px; height: 420px;
+  background: radial-gradient(circle, rgba(180,101,29,.35) 0%, transparent 70%);
+  border-radius: 50%;
+}
+.hero-logo-img {
+  width: min(420px, 90%);
+  filter: drop-shadow(0 20px 50px rgba(0,0,0,.6));
+  animation: float 4s ease-in-out infinite;
+  position: relative; z-index: 1;
+}
+@keyframes float {
+  0%, 100% { transform: translateY(0) rotate(0deg); }
+  50%       { transform: translateY(-16px) rotate(1deg); }
+}
+
+/* ══ STATS BAR ═══════════════════════════════════════════ */
+.stats-bar {
+  background: var(--rust);
+  display: flex; justify-content: center; flex-wrap: wrap;
+}
+.stat-item {
+  flex: 1; min-width: 150px;
+  text-align: center; padding: 26px 16px;
+  border-right: 1px solid rgba(255,255,255,.15);
+  transition: background .2s;
+}
+.stat-item:last-child { border-right: none; }
+.stat-item:hover { background: var(--rust2); }
+.stat-num {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.9rem; font-weight: 900;
+  color: var(--gold); display: block; line-height: 1;
+}
+.stat-label {
+  color: rgba(255,255,255,.8); font-size: .78rem;
+  font-weight: 700; letter-spacing: .08em; text-transform: uppercase; margin-top: 6px;
+}
+
+/* ══ SECTIONS ════════════════════════════════════════════ */
+section { padding: 80px 5%; }
+.section-label {
+  display: inline-block; color: var(--copper); font-weight: 700; font-size: .82rem;
+  letter-spacing: .14em; text-transform: uppercase; margin-bottom: 10px;
+}
+.section-title {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(1.9rem, 4vw, 3rem); color: var(--dark); margin-bottom: 12px;
+}
+.section-title .r { color: var(--rust); }
+.section-sub {
+  color: #888; font-size: 1rem; margin-bottom: 48px;
+  max-width: 520px; line-height: 1.65;
+}
+.centered { text-align: center; }
+.centered .section-sub { margin-left: auto; margin-right: auto; }
+
+/* ══ CATEGORY PILLS ══════════════════════════════════════ */
+.cat-pills {
+  display: flex; gap: 8px;
+  justify-content: center; margin-bottom: 40px;
+  /* mobile: horizontal scroll */
+  flex-wrap: wrap;
+}
+.cat-pill {
+  background: var(--white); border: 2px solid var(--sand);
+  color: var(--charcoal); font-weight: 700; font-size: .85rem;
+  padding: 9px 18px; border-radius: 50px; cursor: pointer;
+  display: flex; align-items: center; gap: 6px;
+  transition: all .2s; white-space: nowrap; flex-shrink: 0;
+}
+.cat-pill:hover, .cat-pill.active {
+  background: var(--rust); border-color: var(--rust);
+  color: var(--white); transform: translateY(-2px);
+  box-shadow: 0 6px 18px rgba(192,57,43,.25);
+}
+
+/* ══ MENU ════════════════════════════════════════════════ */
+.menu-section { background: var(--cream); }
+
+#menuGrid {
+  background: var(--white); border-radius: 24px;
+  padding: 36px 40px;
+  box-shadow: 0 4px 32px rgba(0,0,0,.06);
+}
+
+.menu-category-block { margin-bottom: 48px; }
+.menu-category-block:last-child { margin-bottom: 0; }
+
+.menu-cat-heading {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.4rem; color: var(--rust);
+  border-bottom: 3px solid var(--gold);
+  padding-bottom: 10px; margin-bottom: 4px;
+  display: flex; align-items: center; gap: 10px; flex-wrap: wrap;
+}
+
+.menu-row {
+  display: flex; align-items: flex-start; justify-content: space-between;
+  padding: 16px 8px 16px 4px;
+  border-bottom: 1px solid rgba(0,0,0,.06); gap: 12px;
+  transition: background .15s, padding-left .15s; border-radius: 8px;
+}
+.menu-row:last-child { border-bottom: none; }
+.menu-row:hover { background: var(--cream); padding-left: 12px; }
+
+.menu-row-left { flex: 1; min-width: 0; }
+.menu-row-left h3 {
+  font-weight: 900; font-size: .97rem; margin-bottom: 3px; color: var(--dark);
+  line-height: 1.45; display: flex; flex-wrap: wrap; align-items: center; gap: 6px;
+}
+.menu-row-left p { color: #999; font-size: .855rem; line-height: 1.5; }
+
+.menu-row-right { display: flex; align-items: center; gap: 10px; flex-shrink: 0; }
+.price { font-family: 'Playfair Display', serif; font-size: 1.15rem; color: var(--rust); white-space: nowrap; font-weight: 700; }
+
+/* size grid (pizza / cakes) */
+.size-row {
+  display: flex; gap: 12px; flex-wrap: wrap;
+  padding: 14px 8px 14px 4px;
+  border-bottom: 1px solid rgba(0,0,0,.06); align-items: center;
+}
+.size-row:last-child { border-bottom: none; }
+.size-item { display: flex; flex-direction: column; gap: 6px; flex: 1; min-width: 160px; }
+.size-name { font-weight: 900; font-size: .95rem; color: var(--dark); display: flex; flex-wrap: wrap; align-items: center; gap: 8px; }
+.size-prices { display: flex; gap: 16px; flex-wrap: wrap; }
+.size-col { display: flex; flex-direction: column; align-items: center; gap: 2px; }
+.size-label { font-size: .7rem; font-weight: 700; color: #aaa; letter-spacing: .08em; text-transform: uppercase; }
+.size-price { font-family: 'Playfair Display', serif; font-size: 1.05rem; color: var(--rust); font-weight: 700; }
+
+.badge {
+  background: var(--rust); color: var(--white);
+  font-weight: 900; font-size: .65rem; text-transform: uppercase;
+  padding: 3px 9px; border-radius: 50px; letter-spacing: .06em;
+  white-space: nowrap; flex-shrink: 0; line-height: 1.6;
+}
+.badge.gold { background: var(--gold); color: var(--dark); }
+.badge.pop  { background: var(--copper); color: var(--white); }
+
+/* ══ WHY US ══════════════════════════════════════════════ */
+.why-section { background: var(--dark); }
+.why-section .section-title { color: var(--white); }
+.why-section .section-sub   { color: rgba(255,255,255,.5); }
+.why-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+  gap: 20px;
+}
+.why-card {
+  background: rgba(255,255,255,.04); border: 1px solid rgba(255,255,255,.08);
+  border-radius: 20px; padding: 32px 24px;
+  transition: background .2s, transform .2s;
+}
+.why-card:hover { background: rgba(255,255,255,.08); transform: translateY(-4px); }
+.why-icon { font-size: 2rem; margin-bottom: 16px; display: block; }
+.why-card h3 { font-family: 'Playfair Display', serif; font-size: 1.15rem; color: var(--gold); margin-bottom: 8px; }
+.why-card p  { color: rgba(255,255,255,.6); font-size: .88rem; line-height: 1.7; }
+
+/* ══ CATERING BANNER ═════════════════════════════════════ */
+.catering-banner {
+  background: var(--rust); text-align: center; padding: 56px 5%;
+  position: relative; overflow: hidden;
+}
+.catering-banner::before {
+  content: ''; position: absolute; top: -100px; left: -100px;
+  width: 400px; height: 400px; background: rgba(255,255,255,.05); border-radius: 50%;
+}
+.catering-banner::after {
+  content: ''; position: absolute; bottom: -80px; right: -80px;
+  width: 320px; height: 320px; background: rgba(255,255,255,.05); border-radius: 50%;
+}
+.catering-banner h2 {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(1.6rem, 4vw, 3rem); color: var(--white);
+  margin-bottom: 14px; position: relative; z-index: 1;
+}
+.catering-banner p {
+  color: rgba(255,255,255,.85); font-size: 1rem; margin-bottom: 28px;
+  position: relative; z-index: 1; max-width: 560px; margin-left: auto; margin-right: auto;
+}
+.catering-banner .btn-white {
+  background: var(--white); color: var(--rust); border: none; border-radius: 50px;
+  padding: 14px 36px; font-family: 'Lato', sans-serif; font-weight: 900;
+  font-size: .95rem; cursor: pointer; text-decoration: none; display: inline-block;
+  letter-spacing: .04em; position: relative; z-index: 1;
+  transition: background .2s, transform .2s;
+}
+.catering-banner .btn-white:hover { background: var(--cream); transform: scale(1.05); }
+
+/* ══ LOCATION ════════════════════════════════════════════ */
+.location-section { background: var(--sand); }
+.loc-grid {
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 20px;
+}
+.loc-card {
+  background: var(--white); border-radius: 20px; padding: 32px 24px;
+  box-shadow: 0 4px 20px rgba(0,0,0,.06);
+  transition: transform .2s, box-shadow .2s;
+}
+.loc-card:hover { transform: translateY(-4px); box-shadow: 0 12px 32px rgba(0,0,0,.1); }
+.loc-icon { font-size: 1.9rem; margin-bottom: 12px; display: block; }
+.loc-card h3 { font-family: 'Playfair Display', serif; font-size: 1.1rem; color: var(--rust); margin-bottom: 8px; }
+.loc-card p  { color: #666; font-size: .88rem; line-height: 1.7; }
+.loc-card .phone {
+  display: inline-flex; align-items: center; gap: 8px;
+  margin-top: 12px; color: var(--rust); font-weight: 900;
+  font-size: 1rem; text-decoration: none;
+}
+.loc-card .phone:hover { text-decoration: underline; }
+
+/* ══ FOOTER ══════════════════════════════════════════════ */
+footer {
+  background: var(--dark); padding: 44px 5% 28px;
+  text-align: center; border-top: 3px solid var(--rust);
+}
+.footer-logo img { height: 64px; margin-bottom: 16px; filter: drop-shadow(0 2px 8px rgba(0,0,0,.4)); }
+footer p { color: rgba(255,255,255,.5); font-size: .88rem; line-height: 1.7; }
+footer .tagline { color: var(--gold); font-family: 'Playfair Display', serif; font-size: .95rem; margin-bottom: 6px; }
+
+/* ══════════════════════════════════════════════════════════
+   RESPONSIVE — TABLET  ≤ 900px
+══════════════════════════════════════════════════════════ */
+@media (max-width: 900px) {
+  :root { --nav-h: 64px; }
+
+  /* Nav: hide links + CTA, show hamburger */
+  .nav-links, .nav-cta { display: none; }
+  .hamburger { display: flex; }
+
+  /* Hero: single column, image on top */
+  .hero {
+    grid-template-columns: 1fr;
+    padding: calc(var(--nav-h) + 28px) 5% 60px;
+    gap: 32px; text-align: center;
+    min-height: auto;
+  }
+  .hero-image { order: -1; }
+  .hero-logo-img { width: min(300px, 68%); }
+  .hero-logo-glow { width: 260px; height: 260px; }
+  .hero-text > p   { margin-left: auto; margin-right: auto; }
+  .hero-btns       { justify-content: center; }
+  .hero-badge      { margin-left: auto; margin-right: auto; }
+
+  /* Stats: 2 × 2 grid */
+  .stats-bar { display: grid; grid-template-columns: 1fr 1fr; }
+  .stat-item {
+    border-right: none;
+    border-bottom: 1px solid rgba(255,255,255,.12);
+  }
+  .stat-item:nth-child(odd)  { border-right: 1px solid rgba(255,255,255,.12); }
+  .stat-item:nth-child(3),
+  .stat-item:nth-child(4)    { border-bottom: none; }
+
+  /* Menu */
+  #menuGrid { padding: 28px 22px; }
+
+  /* Why: 2 cols */
+  .why-grid { grid-template-columns: repeat(2, 1fr); }
+}
+
+/* ══════════════════════════════════════════════════════════
+   RESPONSIVE — MOBILE  ≤ 600px
+══════════════════════════════════════════════════════════ */
+@media (max-width: 600px) {
+  :root { --nav-h: 60px; }
+
+  section { padding: 56px 4%; }
+
+  /* Nav logo */
+  .nav-logo img { height: 42px; }
+
+  /* Hero */
+  .hero { padding: calc(var(--nav-h) + 20px) 4% 48px; gap: 24px; }
+  .hero-logo-img { width: min(220px, 62%); }
+  .hero-logo-glow { width: 200px; height: 200px; }
+  .hero-btns { flex-direction: column; align-items: center; }
+  .btn-primary,
+  .btn-outline {
+    width: 100%; max-width: 300px;
+    text-align: center; padding: 15px 20px;
+  }
+
+  /* Stats: stay 2-col but tighter */
+  .stat-item { padding: 18px 10px; }
+  .stat-num  { font-size: 1.45rem; }
+  .stat-label { font-size: .72rem; }
+
+  /* Category pills → scrollable single row */
+  .cat-pills {
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    justify-content: flex-start;
+    padding-bottom: 6px;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    margin-left: -4%; margin-right: -4%;
+    padding-left: 4%; padding-right: 4%;
+  }
+  .cat-pills::-webkit-scrollbar { display: none; }
+  .cat-pill { font-size: .78rem; padding: 8px 14px; }
+
+  /* Menu grid */
+  #menuGrid { padding: 18px 14px; border-radius: 16px; }
+  .menu-cat-heading { font-size: 1.2rem; }
+  .menu-row { padding: 13px 6px 13px 2px; }
+  .menu-row-left h3 { font-size: .9rem; }
+  .menu-row-left p  { font-size: .8rem; }
+  .price { font-size: 1.05rem; }
+
+  /* Pizza size rows: full width */
+  .size-item { min-width: 100%; }
+
+  /* Why: single column */
+  .why-grid { grid-template-columns: 1fr; gap: 14px; }
+  .why-card { padding: 24px 20px; }
+
+  /* Location: single column */
+  .loc-grid { grid-template-columns: 1fr; }
+  .loc-card { padding: 28px 20px; }
+
+  /* Catering */
+  .catering-banner { padding: 44px 4%; }
+  .catering-banner .btn-white {
+    width: 100%; max-width: 300px; display: block;
+    margin: 0 auto;
+  }
+
+  /* Footer */
+  footer { padding: 36px 4% 24px; }
+  .footer-logo img { height: 56px; }
+}
+
+/* ══════════════════════════════════════════════════════════
+   RESPONSIVE — TINY  ≤ 380px
+══════════════════════════════════════════════════════════ */
+@media (max-width: 380px) {
+  .hero-text h1 { font-size: 1.95rem; }
+  .hero-subtitle { font-size: .82rem; }
+  .hero-badge { font-size: .74rem; padding: 6px 14px; }
+  .stat-num { font-size: 1.25rem; }
+  .stat-label { font-size: .68rem; letter-spacing: .04em; }
+  #menuGrid { padding: 14px 10px; }
+  .badge { font-size: .6rem; padding: 2px 7px; }
+}
+</style>
+</head>
+<body>
+
+<!-- ── NAVBAR ── -->
+<nav>
+  <div class="nav-inner">
+    <a class="nav-logo" href="#"><img src="LOGO.png" alt="Amsolan West Kitchen"></a>
+    <ul class="nav-links">
+      <li><a href="#menu">Menu</a></li>
+      <li><a href="#about">About</a></li>
+      <li><a href="#location">Location</a></li>
+    </ul>
+    <button class="nav-cta" onclick="document.getElementById('menu').scrollIntoView({behavior:'smooth'})">Order Now</button>
+    <div class="hamburger" id="hamburger">
+      <span></span><span></span><span></span>
+    </div>
+  </div>
+  <div class="mobile-menu" id="mobileMenu">
+    <a href="#menu" onclick="closeMobileMenu()">🍽️ Menu</a>
+    <a href="#about" onclick="closeMobileMenu()">ℹ️ About</a>
+    <a href="#location" onclick="closeMobileMenu()">📍 Location</a>
+    <a href="tel:+23273288728" class="mob-cta" onclick="closeMobileMenu()">📞 +232 73 288728</a>
+  </div>
+</nav>
+
+<!-- ── HERO ── -->
+<section class="hero" id="home">
+  <div class="hero-pattern"></div>
+  <div class="hero-text">
+    <span class="hero-badge">🍽️ Enjoy Homestyle Cooking</span>
+    <p class="hero-subtitle">Amsolan West Kitchen</p>
+    <h1>
+      <span class="accent">Good Food,</span>
+      <span class="line2">Good Vibes.</span>
+    </h1>
+    <p>Fresh grilled chicken, fish, burgers, pizza, shawarma and so much more — cooked with love and served with pride right here in Freetown.</p>
+    <div class="hero-btns">
+      <a href="#menu" class="btn-primary">View Full Menu</a>
+      <a href="#location" class="btn-outline">Find Us</a>
+    </div>
+  </div>
+  <div class="hero-image">
+    <div class="hero-logo-wrap">
+      <div class="hero-logo-glow"></div>
+      <img src="rice.png" alt="Amsolan West Kitchen Logo" class="hero-logo-img">
+    </div>
+  </div>
+</section>
+
+<!-- ── STATS ── -->
+<div class="stats-bar">
+  <div class="stat-item"><span class="stat-num">50+</span><span class="stat-label">Menu Items</span></div>
+  <div class="stat-item"><span class="stat-num">100%</span><span class="stat-label">Homestyle</span></div>
+  <div class="stat-item"><span class="stat-num">🔥</span><span class="stat-label">Made Fresh Daily</span></div>
+  <div class="stat-item"><span class="stat-num">Events</span><span class="stat-label">Catering Available</span></div>
+</div>
+
+<!-- ── MENU ── -->
+<section class="menu-section" id="menu">
+  <div class="centered">
+    <span class="section-label">Our Menu</span>
+    <h2 class="section-title">What We're <span class="r">Cooking</span></h2>
+    <p class="section-sub">From grilled fish to pizza, burgers to jollof rice — there's something delicious for everyone.</p>
+  </div>
+
+  <!-- Category Pills -->
+  <div class="cat-pills">
+    <button class="cat-pill active" onclick="filterCat('all', this)">🍽️ All</button>
+    <button class="cat-pill" onclick="filterCat('chicken', this)">🍗 Chicken</button>
+    <button class="cat-pill" onclick="filterCat('fish', this)">🐟 Fish</button>
+    <button class="cat-pill" onclick="filterCat('country', this)">🐓 Country Chicken</button>
+    <button class="cat-pill" onclick="filterCat('burgers', this)">🍔 Burgers</button>
+    <button class="cat-pill" onclick="filterCat('shawarma', this)">🌯 Shawarma</button>
+    <button class="cat-pill" onclick="filterCat('pizza', this)">🍕 Pizza</button>
+    <button class="cat-pill" onclick="filterCat('jollof', this)">🍚 Jollof Rice</button>
+    <button class="cat-pill" onclick="filterCat('spaghetti', this)">🍝 Pasta</button>
+    <button class="cat-pill" onclick="filterCat('sides', this)">🥗 Sides</button>
+    <button class="cat-pill" onclick="filterCat('snacks', this)">🥟 Snacks</button>
+    <button class="cat-pill" onclick="filterCat('desserts', this)">🍰 Desserts</button>
+    <button class="cat-pill" onclick="filterCat('drinks', this)">🥤 Drinks</button>
+  </div>
+
+  <div id="menuGrid">
+
+    <!-- CHICKEN -->
+    <div class="menu-category-block" data-cat="chicken">
+      <h3 class="menu-cat-heading">🍗 Chicken</h3>
+      <div class="menu-row">
+        <div class="menu-row-left"><h3>Full Grilled Chicken &amp; Veg <span class="badge gold">Best Value</span></h3><p>Whole grilled chicken served with garden vegetables.</p></div>
+        <div class="menu-row-right"><span class="price">NLE 350</span></div>
+      </div>
+      <div class="menu-row">
+        <div class="menu-row-left"><h3>Grilled Chicken Leg, Chips &amp; Coleslaw</h3><p>Juicy grilled chicken leg with crispy chips and creamy coleslaw.</p></div>
+        <div class="menu-row-right"><span class="price">NLE 200</span></div>
+      </div>
+      <div class="menu-row">
+        <div class="menu-row-left"><h3>Grilled Chicken Leg, Fried Rice &amp; Coleslaw</h3><p>Tender chicken leg served with fragrant fried rice and coleslaw.</p></div>
+        <div class="menu-row-right"><span class="price">NLE 200</span></div>
+      </div>
+      <div class="menu-row">
+        <div class="menu-row-left"><h3>Grilled Chicken Leg, Fried Rice, Coleslaw, Plantain &amp; Chips <span class="badge pop">Popular</span></h3><p>The full combo — chicken, rice, coleslaw, sweet plantain and chips.</p></div>
+        <div class="menu-row-right"><span class="price">NLE 350</span></div>
+      </div>
+    </div>
+
+    <!-- FISH -->
+    <div class="menu-category-block" data-cat="fish">
+      <h3 class="menu-cat-heading">🐟 Fish</h3>
+      <div class="menu-row">
+        <div class="menu-row-left"><h3>Big Size Grilled Fish with Chips, Coleslaw &amp; Plantain <span class="badge pop">Popular</span></h3></div>
+        <div class="menu-row-right"><span class="price">NLE 500</span></div>
+      </div>
+      <div class="menu-row">
+        <div class="menu-row-left"><h3>Big Size Grilled Fish with Fried Rice, Chips, Plantain &amp; Coleslaw <span class="badge gold">Feast</span></h3></div>
+        <div class="menu-row-right"><span class="price">NLE 600</span></div>
+      </div>
+      <div class="menu-row">
+        <div class="menu-row-left"><h3>Medium Size Grilled Fish with Chips, Coleslaw &amp; Plantain</h3></div>
+        <div class="menu-row-right"><span class="price">NLE 350</span></div>
+      </div>
+      <div class="menu-row">
+        <div class="menu-row-left"><h3>Medium Size Grilled Fish with Fried Rice, Chips, Plantain &amp; Coleslaw</h3></div>
+        <div class="menu-row-right"><span class="price">NLE 450</span></div>
+      </div>
+      <div class="menu-row">
+        <div class="menu-row-left"><h3>Small Size Grilled Fish with Chips, Coleslaw &amp; Plantain</h3></div>
+        <div class="menu-row-right"><span class="price">NLE 250</span></div>
+      </div>
+      <div class="menu-row">
+        <div class="menu-row-left"><h3>Small Size Grilled Fish with Fried Rice &amp; Coleslaw</h3></div>
+        <div class="menu-row-right"><span class="price">NLE 220</span></div>
+      </div>
+    </div>
+
+    <!-- COUNTRY CHICKEN -->
+    <div class="menu-category-block" data-cat="country">
+      <h3 class="menu-cat-heading">🐓 Country Chicken</h3>
+      <div class="menu-row">
+        <div class="menu-row-left"><h3>½ Grilled Country Chicken with Plantain, Chips &amp; Coleslaw</h3></div>
+        <div class="menu-row-right"><span class="price">NLE 350</span></div>
+      </div>
+      <div class="menu-row">
+        <div class="menu-row-left"><h3>½ Grilled Chicken with Fried Rice, Plantain, Chips &amp; Coleslaw <span class="badge pop">Popular</span></h3></div>
+        <div class="menu-row-right"><span class="price">NLE 450</span></div>
+      </div>
+      <div class="menu-row">
+        <div class="menu-row-left"><h3>Full Grilled Country Chicken with Fried Rice &amp; Sides <span class="badge gold">Best Value</span></h3></div>
+        <div class="menu-row-right"><span class="price">NLE 500</span></div>
+      </div>
+    </div>
+
+    <!-- BURGERS -->
+    <div class="menu-category-block" data-cat="burgers">
+      <h3 class="menu-cat-heading">🍔 Burgers</h3>
+      <div class="menu-row">
+        <div class="menu-row-left"><h3>Chicken Burger</h3></div>
+        <div class="menu-row-right"><span class="price">NLE 95</span></div>
+      </div>
+      <div class="menu-row">
+        <div class="menu-row-left"><h3>Beef Burger</h3></div>
+        <div class="menu-row-right"><span class="price">NLE 95</span></div>
+      </div>
+      <div class="menu-row">
+        <div class="menu-row-left"><h3>Egg &amp; Beef Burger</h3></div>
+        <div class="menu-row-right"><span class="price">NLE 150</span></div>
+      </div>
+      <div class="menu-row">
+        <div class="menu-row-left"><h3>Cheese &amp; Veg Burger</h3></div>
+        <div class="menu-row-right"><span class="price">NLE 85</span></div>
+      </div>
+      <div class="menu-row">
+        <div class="menu-row-left"><h3>Cheese &amp; Beef Burger</h3></div>
+        <div class="menu-row-right"><span class="price">NLE 150</span></div>
+      </div>
+      <div class="menu-row">
+        <div class="menu-row-left"><h3>Chicken Burger with Chips &amp; Coleslaw <span class="badge pop">Popular</span></h3></div>
+        <div class="menu-row-right"><span class="price">NLE 180</span></div>
+      </div>
+      <div class="menu-row">
+        <div class="menu-row-left"><h3>Beef Burger with Chips &amp; Coleslaw</h3></div>
+        <div class="menu-row-right"><span class="price">NLE 180</span></div>
+      </div>
+      <div class="menu-row">
+        <div class="menu-row-left"><h3>Egg &amp; Beef Burger with Chips &amp; Coleslaw</h3></div>
+        <div class="menu-row-right"><span class="price">NLE 200</span></div>
+      </div>
+      <div class="menu-row">
+        <div class="menu-row-left"><h3>Cheese &amp; Beef Burger with Chips &amp; Coleslaw</h3></div>
+        <div class="menu-row-right"><span class="price">NLE 200</span></div>
+      </div>
+    </div>
+
+    <!-- SHAWARMA -->
+    <div class="menu-category-block" data-cat="shawarma">
+      <h3 class="menu-cat-heading">🌯 Shawarma &amp; Sandwich</h3>
+      <div class="menu-row">
+        <div class="menu-row-left"><h3>Chicken Shawarma</h3></div>
+        <div class="menu-row-right"><span class="price">NLE 95</span></div>
+      </div>
+      <div class="menu-row">
+        <div class="menu-row-left"><h3>Beef Shawarma</h3></div>
+        <div class="menu-row-right"><span class="price">NLE 95</span></div>
+      </div>
+      <div class="menu-row">
+        <div class="menu-row-left"><h3>Kafta Plate</h3></div>
+        <div class="menu-row-right"><span class="price">NLE 200</span></div>
+      </div>
+      <div class="menu-row">
+        <div class="menu-row-left"><h3>Chicken Shawarma with Chips &amp; Coleslaw <span class="badge pop">Popular</span></h3></div>
+        <div class="menu-row-right"><span class="price">NLE 180</span></div>
+      </div>
+      <div class="menu-row">
+        <div class="menu-row-left"><h3>Beef Shawarma with Chips &amp; Coleslaw</h3></div>
+        <div class="menu-row-right"><span class="price">NLE 180</span></div>
+      </div>
+    </div>
+
+    <!-- PIZZA -->
+    <div class="menu-category-block" data-cat="pizza">
+      <h3 class="menu-cat-heading">🍕 Pizza</h3>
+      <div class="size-row">
+        <div class="size-item">
+          <span class="size-name">Chicken Pizza</span>
+          <div class="size-prices">
+            <div class="size-col"><span class="size-label">S</span><span class="size-price">200</span></div>
+            <div class="size-col"><span class="size-label">M</span><span class="size-price">280</span></div>
+            <div class="size-col"><span class="size-label">L</span><span class="size-price">350</span></div>
+          </div>
+        </div>
+      </div>
+      <div class="size-row">
+        <div class="size-item">
+          <span class="size-name">Beef Pizza</span>
+          <div class="size-prices">
+            <div class="size-col"><span class="size-label">S</span><span class="size-price">200</span></div>
+            <div class="size-col"><span class="size-label">M</span><span class="size-price">280</span></div>
+            <div class="size-col"><span class="size-label">L</span><span class="size-price">350</span></div>
+          </div>
+        </div>
+      </div>
+      <div class="size-row">
+        <div class="size-item">
+          <span class="size-name">Cheese Pizza</span>
+          <div class="size-prices">
+            <div class="size-col"><span class="size-label">S</span><span class="size-price">150</span></div>
+            <div class="size-col"><span class="size-label">M</span><span class="size-price">200</span></div>
+            <div class="size-col"><span class="size-label">L</span><span class="size-price">350</span></div>
+          </div>
+        </div>
+      </div>
+      <div class="size-row">
+        <div class="size-item">
+          <span class="size-name">Veg Pizza</span>
+          <div class="size-prices">
+            <div class="size-col"><span class="size-label">S</span><span class="size-price">200</span></div>
+            <div class="size-col"><span class="size-label">M</span><span class="size-price">230</span></div>
+            <div class="size-col"><span class="size-label">L</span><span class="size-price">350</span></div>
+          </div>
+        </div>
+      </div>
+      <div class="size-row">
+        <div class="size-item">
+          <span class="size-name">Cocktail Pizza <span class="badge pop">Fan Fave</span></span>
+          <div class="size-prices">
+            <div class="size-col"><span class="size-label">S</span><span class="size-price">250</span></div>
+            <div class="size-col"><span class="size-label">M</span><span class="size-price">350</span></div>
+            <div class="size-col"><span class="size-label">L</span><span class="size-price">400</span></div>
+          </div>
+        </div>
+      </div>
+      <div class="size-row">
+        <div class="size-item">
+          <span class="size-name">Pepperoni Pizza</span>
+          <div class="size-prices">
+            <div class="size-col"><span class="size-label">S</span><span class="size-price">200</span></div>
+            <div class="size-col"><span class="size-label">M</span><span class="size-price">300</span></div>
+            <div class="size-col"><span class="size-label">L</span><span class="size-price">350</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- JOLLOF RICE -->
+    <div class="menu-category-block" data-cat="jollof">
+      <h3 class="menu-cat-heading">🍚 Jollof Rice</h3>
+      <div class="menu-row">
+        <div class="menu-row-left"><h3>Jollof Rice with Fish &amp; Veg <span class="badge pop">Popular</span></h3><p>Fragrant jollof rice served with grilled fish and fresh vegetables.</p></div>
+        <div class="menu-row-right"><span class="price">NLE 220</span></div>
+      </div>
+      <div class="menu-row">
+        <div class="menu-row-left"><h3>Jollof Rice with Chicken &amp; Veg</h3><p>Classic jollof rice served with grilled chicken and vegetables.</p></div>
+        <div class="menu-row-right"><span class="price">NLE 200</span></div>
+      </div>
+      <div class="menu-row">
+        <div class="menu-row-left"><h3>Jollof Rice with Beef &amp; Veg</h3><p>Hearty jollof rice with tender beef and garden vegetables.</p></div>
+        <div class="menu-row-right"><span class="price">NLE 220</span></div>
+      </div>
+    </div>
+
+    <!-- SPAGHETTI -->
+    <div class="menu-category-block" data-cat="spaghetti">
+      <h3 class="menu-cat-heading">🍝 Pasta &amp; Noodles</h3>
+      <div class="menu-row">
+        <div class="menu-row-left"><h3>Spaghetti Bolognese <span class="badge pop">Popular</span></h3><p>Classic spaghetti with rich, slow-cooked meat sauce.</p></div>
+        <div class="menu-row-right"><span class="price">NLE 180</span></div>
+      </div>
+      <div class="menu-row">
+        <div class="menu-row-left"><h3>Pasta</h3><p>Tender pasta prepared in our homestyle sauce.</p></div>
+        <div class="menu-row-right"><span class="price">NLE 180</span></div>
+      </div>
+      <div class="menu-row">
+        <div class="menu-row-left"><h3>Chinese Noodles Mix</h3><p>Stir-fried noodles with vegetables and sauce.</p></div>
+        <div class="menu-row-right"><span class="price">NLE 180</span></div>
+      </div>
+    </div>
+
+    <!-- SIDES -->
+    <div class="menu-category-block" data-cat="sides">
+      <h3 class="menu-cat-heading">🥗 Sides</h3>
+      <div class="menu-row">
+        <div class="menu-row-left"><h3>Fattoush Salad</h3><p>Fresh Lebanese-style salad with crispy bread chips.</p></div>
+        <div class="menu-row-right"><span class="price">NLE 180</span></div>
+      </div>
+      <div class="menu-row">
+        <div class="menu-row-left"><h3>Hummus</h3><p>Creamy blended chickpea dip, served with pita.</p></div>
+        <div class="menu-row-right"><span class="price">NLE 120</span></div>
+      </div>
+      <div class="menu-row">
+        <div class="menu-row-left"><h3>Chips</h3><p>Golden crispy chips seasoned to perfection.</p></div>
+        <div class="menu-row-right"><span class="price">NLE 50</span></div>
+      </div>
+      <div class="menu-row">
+        <div class="menu-row-left"><h3>Plantain</h3><p>Sweet fried plantain — the perfect side.</p></div>
+        <div class="menu-row-right"><span class="price">NLE 80</span></div>
+      </div>
+      <div class="menu-row">
+        <div class="menu-row-left"><h3>Coleslaw</h3><p>Creamy homemade coleslaw.</p></div>
+        <div class="menu-row-right"><span class="price">NLE 80</span></div>
+      </div>
+      <div class="menu-row">
+        <div class="menu-row-left"><h3>Fried Beef</h3><p>Tender seasoned fried beef pieces.</p></div>
+        <div class="menu-row-right"><span class="price">NLE 100</span></div>
+      </div>
+    </div>
+
+    <!-- SNACKS -->
+    <div class="menu-category-block" data-cat="snacks">
+      <h3 class="menu-cat-heading">🥟 Snacks</h3>
+      <div class="menu-row">
+        <div class="menu-row-left">
+          <h3>Mini Pizza</h3>
+          <p>Bite-sized cheesy mini pizzas, freshly baked.</p>
+        </div>
+        <div class="menu-row-right" style="flex-direction: column; align-items: flex-end; gap: 4px;">
+          <span style="font-size:.8rem; color:#aaa;">6 Pcs</span><span class="price">NLE 150</span>
+          <span style="font-size:.8rem; color:#aaa;">1 Dozen</span><span class="price">NLE 300</span>
+        </div>
+      </div>
+      <div class="menu-row">
+        <div class="menu-row-left">
+          <h3>Kebbeh</h3>
+          <p>Traditional Middle Eastern meat pastry.</p>
+        </div>
+        <div class="menu-row-right" style="flex-direction: column; align-items: flex-end; gap: 4px;">
+          <span style="font-size:.8rem; color:#aaa;">6 Pcs</span><span class="price">NLE 180</span>
+          <span style="font-size:.8rem; color:#aaa;">1 Dozen</span><span class="price">NLE 360</span>
+        </div>
+      </div>
+      <div class="menu-row">
+        <div class="menu-row-left">
+          <h3>Fataya</h3>
+          <p>Crispy fried pastries filled with spiced meat.</p>
+        </div>
+        <div class="menu-row-right" style="flex-direction: column; align-items: flex-end; gap: 4px;">
+          <span style="font-size:.8rem; color:#aaa;">6 Pcs</span><span class="price">NLE 180</span>
+          <span style="font-size:.8rem; color:#aaa;">1 Dozen</span><span class="price">NLE 360</span>
+        </div>
+      </div>
+      <div class="menu-row">
+        <div class="menu-row-left"><h3>Spring Rolls — Chicken</h3><p>Crispy chicken spring rolls.</p></div>
+        <div class="menu-row-right" style="flex-direction: column; align-items: flex-end; gap: 4px;">
+          <span style="font-size:.8rem; color:#aaa;">6 Pcs</span><span class="price">NLE 150</span>
+          <span style="font-size:.8rem; color:#aaa;">1 Dozen</span><span class="price">NLE 300</span>
+        </div>
+      </div>
+      <div class="menu-row">
+        <div class="menu-row-left"><h3>Spring Rolls — Beef</h3><p>Crispy beef spring rolls.</p></div>
+        <div class="menu-row-right" style="flex-direction: column; align-items: flex-end; gap: 4px;">
+          <span style="font-size:.8rem; color:#aaa;">6 Pcs</span><span class="price">NLE 150</span>
+          <span style="font-size:.8rem; color:#aaa;">1 Dozen</span><span class="price">NLE 300</span>
+        </div>
+      </div>
+      <div class="menu-row">
+        <div class="menu-row-left"><h3>Spring Rolls — Veg</h3><p>Crispy vegetable spring rolls.</p></div>
+        <div class="menu-row-right" style="flex-direction: column; align-items: flex-end; gap: 4px;">
+          <span style="font-size:.8rem; color:#aaa;">6 Pcs</span><span class="price">NLE 150</span>
+          <span style="font-size:.8rem; color:#aaa;">1 Dozen</span><span class="price">NLE 300</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- DESSERTS -->
+    <div class="menu-category-block" data-cat="desserts">
+      <h3 class="menu-cat-heading">🍰 Desserts</h3>
+      <div class="menu-row">
+        <div class="menu-row-left"><h3>Cupcake</h3><p>Freshly baked cupcakes with buttercream frosting.</p></div>
+        <div class="menu-row-right"><span class="price">NLE 35</span></div>
+      </div>
+      <div class="menu-row">
+        <div class="menu-row-left"><h3>Cheese Cake</h3><p>Rich, creamy cheesecake — a real treat.</p></div>
+        <div class="menu-row-right"><span class="price">NLE 100</span></div>
+      </div>
+      <div class="menu-row">
+        <div class="menu-row-left">
+          <h3>Cornflakes Cake <span class="badge gold">Pre-Order</span></h3>
+          <p>Crunchy cornflakes cake — available in three sizes. Must be pre-ordered.</p>
+        </div>
+        <div class="menu-row-right" style="flex-direction: column; align-items: flex-end; gap: 4px;">
+          <span style="font-size:.8rem; color:#aaa;">Small</span><span class="price">NLE 250</span>
+          <span style="font-size:.8rem; color:#aaa;">Medium</span><span class="price">NLE 350</span>
+          <span style="font-size:.8rem; color:#aaa;">Large</span><span class="price">NLE 600</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- DRINKS -->
+    <div class="menu-category-block" data-cat="drinks">
+      <h3 class="menu-cat-heading">🥤 Drinks</h3>
+      <div class="menu-row">
+        <div class="menu-row-left"><h3>Soft Drinks</h3><p>Refreshing chilled soft drinks.</p></div>
+        <div class="menu-row-right"><span class="price">NLE 35</span></div>
+      </div>
+      <div class="menu-row">
+        <div class="menu-row-left"><h3>Juice</h3><p>Fresh cold juice to quench your thirst.</p></div>
+        <div class="menu-row-right"><span class="price">NLE 35</span></div>
+      </div>
+      <div class="menu-row">
+        <div class="menu-row-left"><h3>Water</h3><p>Cool bottled water.</p></div>
+        <div class="menu-row-right"><span class="price">NLE 10</span></div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ── WHY US ── -->
+<section class="why-section" id="about">
+  <div class="centered">
+    <span class="section-label" style="color: var(--copper);">About Us</span>
+    <h2 class="section-title" style="color: var(--white);">Why Amsolan West?</h2>
+    <p class="section-sub" style="color: rgba(255,255,255,.5);">We cook the way your grandmother would — with patience, love, and the best ingredients.</p>
+  </div>
+  <div class="why-grid">
+    <div class="why-card">
+      <span class="why-icon">🔥</span>
+      <h3>Grilled to Perfection</h3>
+      <p>Our fish and chicken are grilled fresh every day — smoky, juicy, and full of flavour.</p>
+    </div>
+    <div class="why-card">
+      <span class="why-icon">🌍</span>
+      <h3>West African Roots</h3>
+      <p>Our recipes celebrate the rich culinary heritage of West Africa, right here in Freetown.</p>
+    </div>
+    <div class="why-card">
+      <span class="why-icon">🍕</span>
+      <h3>Something for Everyone</h3>
+      <p>From jollof rice and fish to pizza and burgers — our menu covers every craving.</p>
+    </div>
+    <div class="why-card">
+      <span class="why-icon">🎉</span>
+      <h3>Event Catering</h3>
+      <p>We cater for all kinds of events — big or small. Let us bring the feast to your occasion.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ── CATERING BANNER ── -->
+<div class="catering-banner">
+  <h2>We Also Cater for All Kinds of Events!</h2>
+  <p>Birthdays, weddings, corporate events and more. Let Amsolan West Kitchen bring the flavour to your celebration.</p>
+  <a href="tel:+23273288728" class="btn-white">📞 Call to Book +232 73 288728</a>
+</div>
+
+<!-- ── LOCATION ── -->
+<section class="location-section" id="location">
+  <div class="centered">
+    <span class="section-label">Find Us</span>
+    <h2 class="section-title">Come Visit <span class="r">Us</span></h2>
+    <p class="section-sub" style="margin-left:auto;margin-right:auto;">We're right here in Freetown, ready to serve you the best homestyle cooking.</p>
+  </div>
+  <div class="loc-grid">
+    <div class="loc-card">
+      <span class="loc-icon">📍</span>
+      <h3>Our Location</h3>
+      <p>1 Sir Samuel Lewis Road<br>(Aberdeen Road Junction)<br>Freetown, Sierra Leone</p>
+    </div>
+    <div class="loc-card">
+      <span class="loc-icon">📞</span>
+      <h3>Call Us</h3>
+      <p>Place an order or make an enquiry — we're happy to help!</p>
+      <a class="phone" href="tel:+23273288728">+232 73 288728</a>
+    </div>
+    <div class="loc-card">
+      <span class="loc-icon">⏰</span>
+      <h3>Opening Hours</h3>
+      <p>Monday – Sunday<br>Open daily<br>Come in and enjoy a hot meal any time.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ── FOOTER ── -->
+<footer>
+  <div class="footer-logo">
+    <img src="LOGO_jpg.png" alt="Amsolan West Kitchen">
+  </div>
+  <p class="tagline">"Enjoy Homestyle Cooking"</p>
+  <p>© 2025 <strong>Amsolan West Kitchen</strong> — 1 Sir Samuel Lewis Road, Freetown, Sierra Leone</p>
+  <p style="margin-top:8px;">Crafted with ❤️ for the people of Freetown.</p>
+</footer>
+
+<script>
+  const hamburger   = document.getElementById('hamburger');
+  const mobileMenu  = document.getElementById('mobileMenu');
+
+  hamburger.addEventListener('click', function (e) {
+    e.stopPropagation();
+    const open = mobileMenu.classList.toggle('open');
+    hamburger.classList.toggle('open', open);
+  });
+
+  // Close when tapping outside the nav
+  document.addEventListener('click', function (e) {
+    if (!hamburger.contains(e.target) && !mobileMenu.contains(e.target)) {
+      closeMobileMenu();
+    }
+  });
+
+  function closeMobileMenu() {
+    hamburger.classList.remove('open');
+    mobileMenu.classList.remove('open');
+  }
+
+  // Category filter
+  function filterCat(cat, el) {
+    document.querySelectorAll('.cat-pill').forEach(p => p.classList.remove('active'));
+    el.classList.add('active');
+    document.querySelectorAll('.menu-category-block').forEach(block => {
+      block.style.display = (cat === 'all' || block.dataset.cat === cat) ? '' : 'none';
+    });
+  }
+</script>
+
+</body>
+</html>
