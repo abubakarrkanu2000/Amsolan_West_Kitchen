@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <title>Amsolan West Kitchen – Enjoy Homestyle Cooking</title>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Lato:wght@400;700;900&display=swap" rel="stylesheet">
 <style>
@@ -22,13 +22,14 @@
   --nav-h:   72px;           /* single source of truth for nav height */
 }
 
-html { scroll-behavior: smooth; scroll-padding-top: var(--nav-h); }
+html { scroll-behavior: smooth; scroll-padding-top: var(--nav-h); -webkit-text-size-adjust: 100%; }
 
 body {
   font-family: 'Lato', sans-serif;
   background: var(--cream);
   color: var(--dark);
   overflow-x: hidden;
+  min-width: 320px;
 }
 
 /* ══ NAVBAR ═════════════════════════════════════════════ */
@@ -42,6 +43,7 @@ nav {
   padding: 0 5%; height: var(--nav-h);
   gap: 16px;
 }
+.nav-logo { flex-shrink: 0; }
 .nav-logo img { height: 50px; filter: drop-shadow(0 2px 8px rgba(0,0,0,.4)); display: block; }
 .nav-links { display: flex; gap: 28px; list-style: none; }
 .nav-links a {
@@ -64,9 +66,11 @@ nav {
 /* Hamburger — hidden on desktop */
 .hamburger {
   display: none; flex-direction: column;
-  justify-content: center; gap: 5px;
-  cursor: pointer; padding: 6px; flex-shrink: 0;
+  justify-content: center; align-items: center; gap: 5px;
+  cursor: pointer; padding: 8px; flex-shrink: 0;
   background: none; border: none;
+  -webkit-tap-highlight-color: transparent;
+  min-width: 44px; min-height: 44px;
 }
 .hamburger span {
   display: block; width: 24px; height: 2.5px;
@@ -92,6 +96,8 @@ nav {
   border-bottom: 1px solid rgba(255,255,255,.07);
   letter-spacing: .06em; text-transform: uppercase;
   transition: color .2s, background .2s;
+  min-height: 44px; display: flex; align-items: center;
+  -webkit-tap-highlight-color: transparent;
 }
 .mobile-menu a:last-child { border-bottom: none; }
 .mobile-menu a:hover { color: var(--gold); background: rgba(255,255,255,.04); }
@@ -104,6 +110,7 @@ nav {
 /* ══ HERO ════════════════════════════════════════════════ */
 .hero {
   min-height: 100vh;
+  min-height: 100dvh;
   background: linear-gradient(135deg, var(--dark) 0%, #3a1a0a 60%, #5a2a0e 100%);
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -153,7 +160,7 @@ nav {
   margin-bottom: 18px;
 }
 .hero-text > p {
-  color: rgba(255,255,255,.7); font-size: 1rem;
+  color: rgba(255,255,255,.7); font-size: clamp(.88rem,2vw,1rem);
   line-height: 1.75; margin-bottom: 36px; max-width: 480px;
 }
 .hero-btns { display: flex; gap: 12px; flex-wrap: wrap; }
@@ -166,6 +173,7 @@ nav {
   text-decoration: none; display: inline-block; letter-spacing: .04em;
   box-shadow: 0 8px 28px rgba(192,57,43,.4);
   transition: transform .2s, box-shadow .2s, background .2s;
+  -webkit-tap-highlight-color: transparent;
 }
 .btn-primary:hover { transform: translateY(-3px); background: var(--rust2); box-shadow: 0 14px 36px rgba(192,57,43,.5); }
 
@@ -176,6 +184,7 @@ nav {
   font-weight: 900; font-size: .95rem; cursor: pointer;
   text-decoration: none; display: inline-block; letter-spacing: .04em;
   transition: background .2s, color .2s;
+  -webkit-tap-highlight-color: transparent;
 }
 .btn-outline:hover { background: var(--gold); color: var(--dark); }
 
@@ -193,6 +202,7 @@ nav {
 }
 .hero-logo-img {
   width: min(420px, 90%);
+  max-width: 100%;
   filter: drop-shadow(0 20px 50px rgba(0,0,0,.6));
   animation: float 4s ease-in-out infinite;
   position: relative; z-index: 1;
@@ -233,7 +243,7 @@ section { padding: 80px 5%; }
 }
 .section-title {
   font-family: 'Playfair Display', serif;
-  font-size: clamp(1.9rem, 4vw, 3rem); color: var(--dark); margin-bottom: 12px;
+  font-size: clamp(1.6rem, 4vw, 3rem); color: var(--dark); margin-bottom: 12px;
 }
 .section-title .r { color: var(--rust); }
 .section-sub {
@@ -244,18 +254,28 @@ section { padding: 80px 5%; }
 .centered .section-sub { margin-left: auto; margin-right: auto; }
 
 /* ══ CATEGORY PILLS ══════════════════════════════════════ */
+.cat-pills-wrap {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+  margin: 0 -5% 40px;
+  padding: 0 5% 8px;
+}
+.cat-pills-wrap::-webkit-scrollbar { display: none; }
 .cat-pills {
   display: flex; gap: 8px;
-  justify-content: center; margin-bottom: 40px;
-  /* mobile: horizontal scroll */
+  justify-content: center;
   flex-wrap: wrap;
+  min-width: 0;
 }
 .cat-pill {
   background: var(--white); border: 2px solid var(--sand);
   color: var(--charcoal); font-weight: 700; font-size: .85rem;
   padding: 9px 18px; border-radius: 50px; cursor: pointer;
-  display: flex; align-items: center; gap: 6px;
+  display: inline-flex; align-items: center; gap: 6px;
   transition: all .2s; white-space: nowrap; flex-shrink: 0;
+  -webkit-tap-highlight-color: transparent;
+  min-height: 42px;
 }
 .cat-pill:hover, .cat-pill.active {
   background: var(--rust); border-color: var(--rust);
@@ -270,6 +290,7 @@ section { padding: 80px 5%; }
   background: var(--white); border-radius: 24px;
   padding: 36px 40px;
   box-shadow: 0 4px 32px rgba(0,0,0,.06);
+  overflow: hidden;
 }
 
 .menu-category-block { margin-bottom: 48px; }
@@ -299,8 +320,11 @@ section { padding: 80px 5%; }
 }
 .menu-row-left p { color: #999; font-size: .855rem; line-height: 1.5; }
 
-.menu-row-right { display: flex; align-items: center; gap: 10px; flex-shrink: 0; }
-.price { font-family: 'Playfair Display', serif; font-size: 1.15rem; color: var(--rust); white-space: nowrap; font-weight: 700; }
+.menu-row-right { display: flex; align-items: center; gap: 10px; flex-shrink: 0; min-width: 0; }
+.menu-row-right.prices-col { flex-direction: column; align-items: flex-end; gap: 2px; }
+.price-line { display: flex; align-items: center; gap: 6px; justify-content: flex-end; }
+.price-label { font-size: .75rem; color: #aaa; white-space: nowrap; }
+.price { font-family: 'Playfair Display', serif; font-size: clamp(.95rem,2.5vw,1.15rem); color: var(--rust); white-space: nowrap; font-weight: 700; }
 
 /* size grid (pizza / cakes) */
 .size-row {
@@ -443,6 +467,9 @@ footer .tagline { color: var(--gold); font-family: 'Playfair Display', serif; fo
   /* Menu */
   #menuGrid { padding: 28px 22px; }
 
+  /* Pills: scrollable row on tablet */
+  .cat-pills { flex-wrap: nowrap; justify-content: flex-start; }
+
   /* Why: 2 cols */
   .why-grid { grid-template-columns: repeat(2, 1fr); }
 }
@@ -474,19 +501,10 @@ footer .tagline { color: var(--gold); font-family: 'Playfair Display', serif; fo
   .stat-num  { font-size: 1.45rem; }
   .stat-label { font-size: .72rem; }
 
-  /* Category pills → scrollable single row */
-  .cat-pills {
-    flex-wrap: nowrap;
-    overflow-x: auto;
-    justify-content: flex-start;
-    padding-bottom: 6px;
-    -webkit-overflow-scrolling: touch;
-    scrollbar-width: none;
-    margin-left: -4%; margin-right: -4%;
-    padding-left: 4%; padding-right: 4%;
-  }
-  .cat-pills::-webkit-scrollbar { display: none; }
-  .cat-pill { font-size: .78rem; padding: 8px 14px; }
+  /* Category pills → scrollable */
+  .cat-pills-wrap { margin: 0 -4% 32px; padding: 0 4% 8px; }
+  .cat-pills { flex-wrap: nowrap; justify-content: flex-start; }
+  .cat-pill { font-size: .78rem; padding: 8px 14px; min-height: 40px; }
 
   /* Menu grid */
   #menuGrid { padding: 18px 14px; border-radius: 16px; }
@@ -545,15 +563,15 @@ footer .tagline { color: var(--gold); font-family: 'Playfair Display', serif; fo
       <li><a href="#location">Location</a></li>
     </ul>
     <button class="nav-cta" onclick="document.getElementById('menu').scrollIntoView({behavior:'smooth'})">Order Now</button>
-    <div class="hamburger" id="hamburger">
+    <button class="hamburger" id="hamburger" aria-label="Open menu" aria-expanded="false">
       <span></span><span></span><span></span>
-    </div>
+    </button>
   </div>
   <div class="mobile-menu" id="mobileMenu">
     <a href="#menu" onclick="closeMobileMenu()">🍽️ Menu</a>
     <a href="#about" onclick="closeMobileMenu()">ℹ️ About</a>
     <a href="#location" onclick="closeMobileMenu()">📍 Location</a>
-    <a href="tel:+23273288728" class="mob-cta" onclick="closeMobileMenu()">📞 +232 73 288728</a>
+    <a href="tel:+23276369828" class="mob-cta" onclick="closeMobileMenu()">📞 +232 76 369828</a>
   </div>
 </nav>
 
@@ -576,7 +594,7 @@ footer .tagline { color: var(--gold); font-family: 'Playfair Display', serif; fo
   <div class="hero-image">
     <div class="hero-logo-wrap">
       <div class="hero-logo-glow"></div>
-      <img src="rice.png" alt="Amsolan West Kitchen Logo" class="hero-logo-img">
+      <img src="rice.webp" alt="Amsolan West Kitchen Logo" class="hero-logo-img">
     </div>
   </div>
 </section>
@@ -598,6 +616,7 @@ footer .tagline { color: var(--gold); font-family: 'Playfair Display', serif; fo
   </div>
 
   <!-- Category Pills -->
+  <div class="cat-pills-wrap">
   <div class="cat-pills">
     <button class="cat-pill active" onclick="filterCat('all', this)">🍽️ All</button>
     <button class="cat-pill" onclick="filterCat('chicken', this)">🍗 Chicken</button>
@@ -612,9 +631,77 @@ footer .tagline { color: var(--gold); font-family: 'Playfair Display', serif; fo
     <button class="cat-pill" onclick="filterCat('snacks', this)">🥟 Snacks</button>
     <button class="cat-pill" onclick="filterCat('desserts', this)">🍰 Desserts</button>
     <button class="cat-pill" onclick="filterCat('drinks', this)">🥤 Drinks</button>
+    <button class="cat-pill" onclick="filterCat('specials', this)">⭐ Daily Specials</button>
+  </div>
   </div>
 
   <div id="menuGrid">
+
+    <!-- DAILY SPECIALS -->
+    <div class="menu-category-block" data-cat="specials">
+      <h3 class="menu-cat-heading">⭐ Daily Specials</h3>
+      <p style="color:#888; font-size:.88rem; margin-bottom:16px; line-height:1.6;">Our specials rotate daily. Each dish is served with your choice of protein — all prepared fresh in our homestyle kitchen.</p>
+      <div class="menu-row">
+        <div class="menu-row-left">
+          <h3>Monday Special — Stew Green</h3>
+          <p>Slow-cooked stew greens, full of flavour. Served with rice.</p>
+        </div>
+        <div class="menu-row-right prices-col">
+          <div class="price-line"><span class="price-label">Kanda</span><span class="price">NLE 100</span></div>
+          <div class="price-line"><span class="price-label">Beef</span><span class="price">NLE 120</span></div>
+          <div class="price-line"><span class="price-label">Fish</span><span class="price">NLE 150</span></div>
+          <div class="price-line"><span class="price-label">Mixed</span><span class="price">NLE 200</span></div>
+        </div>
+      </div>
+      <div class="menu-row">
+        <div class="menu-row-left">
+          <h3>Cassava Leaves <span class="badge pop">Today's Special</span></h3>
+          <p>Traditional cassava leaf stew cooked with oil &amp; palm oil. Served with rice.</p>
+        </div>
+        <div class="menu-row-right prices-col">
+          <div class="price-line"><span class="price-label">Kanda</span><span class="price">NLE 100</span></div>
+          <div class="price-line"><span class="price-label">Beef</span><span class="price">NLE 120</span></div>
+          <div class="price-line"><span class="price-label">Fish</span><span class="price">NLE 150</span></div>
+          <div class="price-line"><span class="price-label">Mixed</span><span class="price">NLE 200</span></div>
+        </div>
+      </div>
+      <div class="menu-row">
+        <div class="menu-row-left">
+          <h3>Krain Krain</h3>
+          <p>Rich and hearty krain krain stew. Served with rice.</p>
+        </div>
+        <div class="menu-row-right prices-col">
+          <div class="price-line"><span class="price-label">Kanda</span><span class="price">NLE 100</span></div>
+          <div class="price-line"><span class="price-label">Beef</span><span class="price">NLE 120</span></div>
+          <div class="price-line"><span class="price-label">Fish</span><span class="price">NLE 150</span></div>
+          <div class="price-line"><span class="price-label">Mixed</span><span class="price">NLE 200</span></div>
+        </div>
+      </div>
+      <div class="menu-row">
+        <div class="menu-row-left">
+          <h3>Potato Leaves</h3>
+          <p>Classic potato leaf stew cooked with oil &amp; palm oil. Served with rice.</p>
+        </div>
+        <div class="menu-row-right prices-col">
+          <div class="price-line"><span class="price-label">Kanda</span><span class="price">NLE 100</span></div>
+          <div class="price-line"><span class="price-label">Beef</span><span class="price">NLE 120</span></div>
+          <div class="price-line"><span class="price-label">Fish</span><span class="price">NLE 150</span></div>
+          <div class="price-line"><span class="price-label">Mixed</span><span class="price">NLE 200</span></div>
+        </div>
+      </div>
+      <div class="menu-row">
+        <div class="menu-row-left">
+          <h3>Groundnut Soup</h3>
+          <p>Creamy, aromatic groundnut soup. Served with rice.</p>
+        </div>
+        <div class="menu-row-right prices-col">
+          <div class="price-line"><span class="price-label">Beef</span><span class="price">NLE 120</span></div>
+          <div class="price-line"><span class="price-label">Fish</span><span class="price">NLE 150</span></div>
+          <div class="price-line"><span class="price-label">Mixed</span><span class="price">NLE 200</span></div>
+        </div>
+      </div>
+      <p style="color:#aaa; font-size:.8rem; margin-top:12px;">📦 Delivery fee depends on location. Call us to place your order.</p>
+    </div>
 
     <!-- CHICKEN -->
     <div class="menu-category-block" data-cat="chicken">
@@ -688,11 +775,11 @@ footer .tagline { color: var(--gold); font-family: 'Playfair Display', serif; fo
       <h3 class="menu-cat-heading">🍔 Burgers</h3>
       <div class="menu-row">
         <div class="menu-row-left"><h3>Chicken Burger</h3></div>
-        <div class="menu-row-right"><span class="price">NLE 95</span></div>
+        <div class="menu-row-right"><span class="price">NLE 100</span></div>
       </div>
       <div class="menu-row">
         <div class="menu-row-left"><h3>Beef Burger</h3></div>
-        <div class="menu-row-right"><span class="price">NLE 95</span></div>
+        <div class="menu-row-right"><span class="price">NLE 100</span></div>
       </div>
       <div class="menu-row">
         <div class="menu-row-left"><h3>Egg &amp; Beef Burger</h3></div>
@@ -729,11 +816,11 @@ footer .tagline { color: var(--gold); font-family: 'Playfair Display', serif; fo
       <h3 class="menu-cat-heading">🌯 Shawarma &amp; Sandwich</h3>
       <div class="menu-row">
         <div class="menu-row-left"><h3>Chicken Shawarma</h3></div>
-        <div class="menu-row-right"><span class="price">NLE 95</span></div>
+        <div class="menu-row-right"><span class="price">NLE 100</span></div>
       </div>
       <div class="menu-row">
         <div class="menu-row-left"><h3>Beef Shawarma</h3></div>
-        <div class="menu-row-right"><span class="price">NLE 95</span></div>
+        <div class="menu-row-right"><span class="price">NLE 100</span></div>
       </div>
       <div class="menu-row">
         <div class="menu-row-left"><h3>Kafta Plate</h3></div>
@@ -741,11 +828,11 @@ footer .tagline { color: var(--gold); font-family: 'Playfair Display', serif; fo
       </div>
       <div class="menu-row">
         <div class="menu-row-left"><h3>Chicken Shawarma with Chips &amp; Coleslaw <span class="badge pop">Popular</span></h3></div>
-        <div class="menu-row-right"><span class="price">NLE 180</span></div>
+        <div class="menu-row-right"><span class="price">NLE 200</span></div>
       </div>
       <div class="menu-row">
         <div class="menu-row-left"><h3>Beef Shawarma with Chips &amp; Coleslaw</h3></div>
-        <div class="menu-row-right"><span class="price">NLE 180</span></div>
+        <div class="menu-row-right"><span class="price">NLE 200</span></div>
       </div>
     </div>
 
@@ -836,15 +923,15 @@ footer .tagline { color: var(--gold); font-family: 'Playfair Display', serif; fo
       <h3 class="menu-cat-heading">🍝 Pasta &amp; Noodles</h3>
       <div class="menu-row">
         <div class="menu-row-left"><h3>Spaghetti Bolognese <span class="badge pop">Popular</span></h3><p>Classic spaghetti with rich, slow-cooked meat sauce.</p></div>
-        <div class="menu-row-right"><span class="price">NLE 180</span></div>
+        <div class="menu-row-right"><span class="price">NLE 200</span></div>
       </div>
       <div class="menu-row">
         <div class="menu-row-left"><h3>Pasta</h3><p>Tender pasta prepared in our homestyle sauce.</p></div>
-        <div class="menu-row-right"><span class="price">NLE 180</span></div>
+        <div class="menu-row-right"><span class="price">NLE 200</span></div>
       </div>
       <div class="menu-row">
         <div class="menu-row-left"><h3>Chinese Noodles Mix</h3><p>Stir-fried noodles with vegetables and sauce.</p></div>
-        <div class="menu-row-right"><span class="price">NLE 180</span></div>
+        <div class="menu-row-right"><span class="price">NLE 200</span></div>
       </div>
     </div>
 
@@ -853,7 +940,7 @@ footer .tagline { color: var(--gold); font-family: 'Playfair Display', serif; fo
       <h3 class="menu-cat-heading">🥗 Sides</h3>
       <div class="menu-row">
         <div class="menu-row-left"><h3>Fattoush Salad</h3><p>Fresh Lebanese-style salad with crispy bread chips.</p></div>
-        <div class="menu-row-right"><span class="price">NLE 180</span></div>
+        <div class="menu-row-right"><span class="price">NLE 200</span></div>
       </div>
       <div class="menu-row">
         <div class="menu-row-left"><h3>Hummus</h3><p>Creamy blended chickpea dip, served with pita.</p></div>
@@ -861,15 +948,15 @@ footer .tagline { color: var(--gold); font-family: 'Playfair Display', serif; fo
       </div>
       <div class="menu-row">
         <div class="menu-row-left"><h3>Chips</h3><p>Golden crispy chips seasoned to perfection.</p></div>
-        <div class="menu-row-right"><span class="price">NLE 50</span></div>
+        <div class="menu-row-right"><span class="price">NLE 80</span></div>
       </div>
       <div class="menu-row">
         <div class="menu-row-left"><h3>Plantain</h3><p>Sweet fried plantain — the perfect side.</p></div>
-        <div class="menu-row-right"><span class="price">NLE 80</span></div>
+        <div class="menu-row-right"><span class="price">NLE 100</span></div>
       </div>
       <div class="menu-row">
         <div class="menu-row-left"><h3>Coleslaw</h3><p>Creamy homemade coleslaw.</p></div>
-        <div class="menu-row-right"><span class="price">NLE 80</span></div>
+        <div class="menu-row-right"><span class="price">NLE 50</span></div>
       </div>
       <div class="menu-row">
         <div class="menu-row-left"><h3>Fried Beef</h3><p>Tender seasoned fried beef pieces.</p></div>
@@ -885,9 +972,9 @@ footer .tagline { color: var(--gold); font-family: 'Playfair Display', serif; fo
           <h3>Mini Pizza</h3>
           <p>Bite-sized cheesy mini pizzas, freshly baked.</p>
         </div>
-        <div class="menu-row-right" style="flex-direction: column; align-items: flex-end; gap: 4px;">
-          <span style="font-size:.8rem; color:#aaa;">6 Pcs</span><span class="price">NLE 150</span>
-          <span style="font-size:.8rem; color:#aaa;">1 Dozen</span><span class="price">NLE 300</span>
+        <div class="menu-row-right prices-col">
+          <div class="price-line"><span class="price-label">6 Pcs</span><span class="price">NLE 180</span></div>
+          <div class="price-line"><span class="price-label">1 Dozen</span><span class="price">NLE 360</span></div>
         </div>
       </div>
       <div class="menu-row">
@@ -895,9 +982,9 @@ footer .tagline { color: var(--gold); font-family: 'Playfair Display', serif; fo
           <h3>Kebbeh</h3>
           <p>Traditional Middle Eastern meat pastry.</p>
         </div>
-        <div class="menu-row-right" style="flex-direction: column; align-items: flex-end; gap: 4px;">
-          <span style="font-size:.8rem; color:#aaa;">6 Pcs</span><span class="price">NLE 180</span>
-          <span style="font-size:.8rem; color:#aaa;">1 Dozen</span><span class="price">NLE 360</span>
+        <div class="menu-row-right prices-col">
+          <div class="price-line"><span class="price-label">6 Pcs</span><span class="price">NLE 180</span></div>
+          <div class="price-line"><span class="price-label">1 Dozen</span><span class="price">NLE 360</span></div>
         </div>
       </div>
       <div class="menu-row">
@@ -905,30 +992,30 @@ footer .tagline { color: var(--gold); font-family: 'Playfair Display', serif; fo
           <h3>Fataya</h3>
           <p>Crispy fried pastries filled with spiced meat.</p>
         </div>
-        <div class="menu-row-right" style="flex-direction: column; align-items: flex-end; gap: 4px;">
-          <span style="font-size:.8rem; color:#aaa;">6 Pcs</span><span class="price">NLE 180</span>
-          <span style="font-size:.8rem; color:#aaa;">1 Dozen</span><span class="price">NLE 360</span>
+        <div class="menu-row-right prices-col">
+          <div class="price-line"><span class="price-label">6 Pcs</span><span class="price">NLE 180</span></div>
+          <div class="price-line"><span class="price-label">1 Dozen</span><span class="price">NLE 360</span></div>
         </div>
       </div>
       <div class="menu-row">
         <div class="menu-row-left"><h3>Spring Rolls — Chicken</h3><p>Crispy chicken spring rolls.</p></div>
-        <div class="menu-row-right" style="flex-direction: column; align-items: flex-end; gap: 4px;">
-          <span style="font-size:.8rem; color:#aaa;">6 Pcs</span><span class="price">NLE 150</span>
-          <span style="font-size:.8rem; color:#aaa;">1 Dozen</span><span class="price">NLE 300</span>
+        <div class="menu-row-right prices-col">
+          <div class="price-line"><span class="price-label">6 Pcs</span><span class="price">NLE 180</span></div>
+          <div class="price-line"><span class="price-label">1 Dozen</span><span class="price">NLE 360</span></div>
         </div>
       </div>
       <div class="menu-row">
         <div class="menu-row-left"><h3>Spring Rolls — Beef</h3><p>Crispy beef spring rolls.</p></div>
-        <div class="menu-row-right" style="flex-direction: column; align-items: flex-end; gap: 4px;">
-          <span style="font-size:.8rem; color:#aaa;">6 Pcs</span><span class="price">NLE 150</span>
-          <span style="font-size:.8rem; color:#aaa;">1 Dozen</span><span class="price">NLE 300</span>
+        <div class="menu-row-right prices-col">
+          <div class="price-line"><span class="price-label">6 Pcs</span><span class="price">NLE 180</span></div>
+          <div class="price-line"><span class="price-label">1 Dozen</span><span class="price">NLE 360</span></div>
         </div>
       </div>
       <div class="menu-row">
         <div class="menu-row-left"><h3>Spring Rolls — Veg</h3><p>Crispy vegetable spring rolls.</p></div>
-        <div class="menu-row-right" style="flex-direction: column; align-items: flex-end; gap: 4px;">
-          <span style="font-size:.8rem; color:#aaa;">6 Pcs</span><span class="price">NLE 150</span>
-          <span style="font-size:.8rem; color:#aaa;">1 Dozen</span><span class="price">NLE 300</span>
+        <div class="menu-row-right prices-col">
+          <div class="price-line"><span class="price-label">6 Pcs</span><span class="price">NLE 180</span></div>
+          <div class="price-line"><span class="price-label">1 Dozen</span><span class="price">NLE 360</span></div>
         </div>
       </div>
     </div>
@@ -949,10 +1036,10 @@ footer .tagline { color: var(--gold); font-family: 'Playfair Display', serif; fo
           <h3>Cornflakes Cake <span class="badge gold">Pre-Order</span></h3>
           <p>Crunchy cornflakes cake — available in three sizes. Must be pre-ordered.</p>
         </div>
-        <div class="menu-row-right" style="flex-direction: column; align-items: flex-end; gap: 4px;">
-          <span style="font-size:.8rem; color:#aaa;">Small</span><span class="price">NLE 250</span>
-          <span style="font-size:.8rem; color:#aaa;">Medium</span><span class="price">NLE 350</span>
-          <span style="font-size:.8rem; color:#aaa;">Large</span><span class="price">NLE 600</span>
+        <div class="menu-row-right prices-col">
+          <div class="price-line"><span class="price-label">Small</span><span class="price">NLE 250</span></div>
+          <div class="price-line"><span class="price-label">Medium</span><span class="price">NLE 350</span></div>
+          <div class="price-line"><span class="price-label">Large</span><span class="price">NLE 600</span></div>
         </div>
       </div>
     </div>
@@ -1012,7 +1099,7 @@ footer .tagline { color: var(--gold); font-family: 'Playfair Display', serif; fo
 <div class="catering-banner">
   <h2>We Also Cater for All Kinds of Events!</h2>
   <p>Birthdays, weddings, corporate events and more. Let Amsolan West Kitchen bring the flavour to your celebration.</p>
-  <a href="tel:+23273288728" class="btn-white">📞 Call to Book +232 73 288728</a>
+  <a href="tel:+23276369828" class="btn-white">📞 Call to Book +232 76 369828</a>
 </div>
 
 <!-- ── LOCATION ── -->
@@ -1032,7 +1119,7 @@ footer .tagline { color: var(--gold); font-family: 'Playfair Display', serif; fo
       <span class="loc-icon">📞</span>
       <h3>Call Us</h3>
       <p>Place an order or make an enquiry — we're happy to help!</p>
-      <a class="phone" href="tel:+23273288728">+232 73 288728</a>
+      <a class="phone" href="tel:+23276369828">+232 76 369828</a>
     </div>
     <div class="loc-card">
       <span class="loc-icon">⏰</span>
@@ -1045,7 +1132,7 @@ footer .tagline { color: var(--gold); font-family: 'Playfair Display', serif; fo
 <!-- ── FOOTER ── -->
 <footer>
   <div class="footer-logo">
-    <img src="LOGO_jpg.png" alt="Amsolan West Kitchen">
+    <img src="LOGO.png" alt="Amsolan West Kitchen">
   </div>
   <p class="tagline">"Enjoy Homestyle Cooking"</p>
   <p>© 2025 <strong>Amsolan West Kitchen</strong> — 1 Sir Samuel Lewis Road, Freetown, Sierra Leone</p>
@@ -1058,20 +1145,25 @@ footer .tagline { color: var(--gold); font-family: 'Playfair Display', serif; fo
 
   hamburger.addEventListener('click', function (e) {
     e.stopPropagation();
-    const open = mobileMenu.classList.toggle('open');
-    hamburger.classList.toggle('open', open);
+    const isOpen = mobileMenu.classList.toggle('open');
+    hamburger.classList.toggle('open', isOpen);
+    hamburger.setAttribute('aria-expanded', isOpen);
   });
 
-  // Close when tapping outside the nav
   document.addEventListener('click', function (e) {
     if (!hamburger.contains(e.target) && !mobileMenu.contains(e.target)) {
       closeMobileMenu();
     }
   });
 
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape') closeMobileMenu();
+  });
+
   function closeMobileMenu() {
     hamburger.classList.remove('open');
     mobileMenu.classList.remove('open');
+    hamburger.setAttribute('aria-expanded', 'false');
   }
 
   // Category filter
